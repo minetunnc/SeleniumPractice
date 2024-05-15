@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import utilies.TestBase;
+
+import java.util.List;
 
 public class Hw_List extends TestBase {
     @Test
@@ -54,6 +57,42 @@ Actions actions = new Actions(driver);
         driver.findElement(By.xpath("//*[.='Clear']")).click();
 //- Sayfayi kapatiniz
         driver.quit();
+    }
+
+    @Test
+    void test03() {
+//===========Homework 3==========================
+   // https://the-internet.herokuapp.com/dropdown adresine gidin.
+      driver.get("https://the-internet.herokuapp.com/dropdown");
+ //  1.Index kullanarak Seçenek 1’i (Option 1) seçin ve yazdırın
+        WebElement element = driver.findElement(By.id("dropdown"));
+        Select select = new Select(element);
+        select.selectByIndex(1);
+        System.out.println(select.getFirstSelectedOption().getText());
+
+//  2.Value kullanarak Seçenek 2'yi (Option 2) seçin ve yazdırın
+        WebElement elementtwo = driver.findElement(By.id("dropdown"));
+        select = new Select(elementtwo);
+        select.selectByValue("2");
+        System.out.println(select.getFirstSelectedOption().getText());
+
+//  3.Visible Text(Görünen metin) kullanarak Seçenek 1’i (Option 1) seçin ve yazdırın
+        WebElement elementthree = driver.findElement(By.id("dropdown"));
+        select = new Select(elementtwo);
+        select.selectByVisibleText("Option 1");
+        System.out.println(select.getFirstSelectedOption().getText());
+        System.out.println("======================");
+
+//  4.Tüm dropdown değerleri(value) yazdırın
+List<WebElement> list = select.getOptions();
+int i =1;
+for (WebElement w : list ){
+    System.out.println(i+"."+w.getText());
+i++;
+}
+        //  5.Dropdown’un boyutunu bulun, Dropdown’da 4 öğe varsa konsolda True , degilse
+     //  False yazdırın.
+
     }
 }
 
